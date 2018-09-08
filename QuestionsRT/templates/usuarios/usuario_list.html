@@ -1,0 +1,58 @@
+{% extends "base_list.html" %}
+{# Load the tag library #}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block page-title %}Listado de Usuarios{% endblock %}
+{% block page-description %}Utilice las opciones para gestionar usuarios{% endblock %}
+
+{% block cabecera_tabla %}
+    <thead>
+    <tr>
+        <td>#</td>
+        <td>Nombre</td>
+        <td>Apellido</td>
+        <td>Email</td>
+        <td>Celular</td>
+    </tr>
+
+    </thead>
+{% endblock cabecera_tabla %}
+{% block cuerpo_tabla %}
+    <tbody>
+    {% if object_list %}
+        {% for usuario in object_list %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.first_name }}</td>
+                <td>{{ usuario.last_name }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.celular }}</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Opciones</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Opciones de gestión de usuarios</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'gestion_usuarios:editar_usuario' usuario.id %}">Editar</a></li>
+                            <li><a href="{% url 'gestion_recursos:asignar_recurso' usuario.id %}">Asignar recursos</a></li>
+                            <li><a href="{% url 'gestion_recursos:consultar_recurso' usuario.id %}">Consultar Recursos</a></li>
+                            <li><a href="{% url 'gestion_recursos:usuario_recurso' usuario.id %}">Transferir recurso</a></li>
+                        </ul>
+                    </div>
+                </td>
+
+            </tr>
+        {% endfor %}
+
+    {% else %}
+        <h1>No hay registros de Usuarios</h1>
+    {% endif %}
+    </tbody>
+{% endblock cuerpo_tabla %}
+
+{% block new_button %}
+    <a href="{% url "gestion_usuarios:crear_usuario" %}" class="btn btn-success"><i class="fa  fa-plus-circle"></i> Crear Usuario</a>
+{% endblock %}

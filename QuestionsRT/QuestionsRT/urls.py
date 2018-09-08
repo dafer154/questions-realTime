@@ -15,7 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls import url, include
+from django.contrib.auth.views import login, logout
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import TemplateView
+
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name="index.html"), name='inicio'),
+    url(r'^inicio$', TemplateView.as_view(template_name="index.html"), name='inicio'),
+    url(r'^usuarios/', include('usuarios.urls', namespace='gestion_usuarios')),
+    #url(r'^preguntas/', include('preguntas.urls', namespace='gestion_preguntas')),
     url(r'^admin/', admin.site.urls),
-]
+    #url(r'^login$', login, name='login'),
+    #url(r'^logout$', logout, {'next_page': 'inicio'}, name='logout'),
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="es">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--=================== Estilos de Terceros ===================-->
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'AdminLTE-2.4.0-rc/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.12.1.custom/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.12.1.custom/jquery-ui.structure.min.css' %}">
+    <!--=================== Estilos propios de todas las paginas ===================-->
+    <!--Icono principal de la pagina -->
+    <!--<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"> -->
+    {% block all-css %}
+        <!-- Custom CSS -->
+        <link href="{% static 'AdminLTE-2.4.0-rc/dist/css/AdminLTE.min.css' %}" rel="stylesheet">
+        <link href="{% static 'AdminLTE-2.4.0-rc/dist/css/skins/_all-skins.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.css' %}"/>
+    {% endblock %}
+
+    <!--=================== Estilos especificos de cada pagina ===================-->
+    {% block specific-css %}
+    {% endblock %}
+
+    <!--=================== Titulo ===================-->
+    <title>{% block title %}Bodega Deltec{% endblock %}</title>
+
+</head>
+
+<body class="hold-transition">
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">B<b>D</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Questions REAL-TIME</b></span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        {% if user.is_authenticated %}
+                            <!-- User Account Menu -->
+                            <li class="dropdown user user-menu">
+                                <!-- Menu Toggle Button -->
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <!-- The user image in the navbar-->
+                                    <img src="{% if foto %}{{ usuario.imagen_url }} {% else %} {% static 'images/perfil_defecto.png' %}{% endif %}" class="user-image" alt="Imagen de perfil">
+                                    <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                    <span class="hidden-xs">{{ user.get_full_name }}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- The user image in the menu -->
+                                    <li class="user-header">
+                                        <img src="{% if foto %}{{ usuario.imagen_url }} {% else %} {% static 'images/perfil_defecto.png' %}{% endif %}" class="img-circle" alt="Imagen de perfil">
+                                        <p>
+                                            {{ user.get_full_name }}
+                                        </p>
+                                    </li>
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="{% url "usuarios:detail" user.id %}" class="btn btn-default btn-flat">Perfil</a>
+                                        </div>
+                                        <div class="pull-right">
+                                                <a class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Cerrar Sesión</a>
+                                            {% else %}
+                                                <a  class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Cerrar Sesión</a>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!--<div id="wrapper">-->
+        {# =================== Carga la barra de navegacion =================== #}
+        {% block navbar %}
+            {# ============= default navbar ============== #}
+                {% include 'sidebar.html' %}
+        {% endblock %}
+
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    {% block page-title %}Bodega Deltec{% endblock %}
+                    <small>{% block page-description %}Bodega Deltec{% endblock %}</small>
+                </h1>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                {# =================== Todo el contenido de la pagina se carga aqui =================== #}
+                {% block content %}
+                {% endblock %}
+            </section>
+        </div>
+
+
+        {# =================== Carga el footer de la pagina =================== #}
+        {% block footer %}
+            {% include 'footer.html' %}
+        {% endblock %}
+
+        {# =================== Carga el footer de la pagina =================== #}
+        {% block right-menu %}
+            {% include 'control_sidebar.html' %}
+        {% endblock %}
+    </div>
+
+
+
+
+<!--=================== Scripts generales de todas las paginas ===================-->
+<!-- jQuery -->
+{% block jquery-js %}
+    <!-- jQuery 2.2.3 -->
+    <script src="{% static 'AdminLTE-2.4.0-rc/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+    <script src="{% static 'jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
+{% endblock %}
+
+{% block custom-js %}
+    <!-- Bootstrap 3.3.6 -->
+    <script src="{% static 'AdminLTE-2.4.0-rc/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'AdminLTE-2.4.0-rc/dist/js/app.min.js' %}"></script>
+
+    <!--Script que permite notificar los mensajes de registro y edicion de todos los actores -->
+    <script src="{% static 'plugins/toastr/toastr.js' %}"></script>
+    <script>
+        {% for msg in messages %}
+            $(document).ready(function(){
+                setTimeout(function() {
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-left",
+                        "showEasing": "swing"
+                    };
+                    toastr["{{ msg.tags }}"]("{{msg}}")
+                }, 500);
+            });
+        {% endfor %}
+    </script>
+{% endblock %}
+
+<!--=================== Scripts especificos de cada pagina ===================-->
+{% block specific-js %}
+{% endblock %}
+
+</body>
+</html>

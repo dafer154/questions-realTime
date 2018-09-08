@@ -1,6 +1,13 @@
-*.pyc
-__pycache__
 .idea
-myvenv
-db.sqlite3
-.DS_Store
+media
+../.idea/
+*.pyc
+.gitignore~
+Thumbs.db
+*/migrations/*
+*/__pycache__/*
+*/*/__pycache__/*
+requirements.txt~
+# No ignorar!
+!*/migrations/__init__.py
+!.gitignore

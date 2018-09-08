@@ -1,0 +1,57 @@
+{% extends "base_list.html" %}
+{# Load the tag library #}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block page-title %}Listado de Recursos{% endblock %}
+{% block page-description %}Utilice las opciones para gestionar recursos{% endblock %}
+
+{% block cabecera_tabla %}
+    <thead>
+    <tr>
+        <td>#</td>
+        <td>Categoria</td>
+        <td>Codigo</td>
+        <td>Nombre</td>
+        <td>Marca</td>
+        <td>Serie</td>
+    </tr>
+
+    </thead>
+{% endblock cabecera_tabla %}
+{% block cuerpo_tabla %}
+    <tbody>
+    {% if object_list %}
+        {% for recurso in object_list %}
+            <tr>
+                <td>{{ recurso.id }}</td>
+                <td>{{ recurso.categoria }}</td>
+                <td>{{ recurso.codigo }}</td>
+                <td>{{ recurso.nombre }}</td>
+                <td>{{ recurso.marca }}</td>
+                <td>{{ recurso.serie}}</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Opciones</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Opciones de gestión de recursos</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'gestion_inventario:editar_recurso' recurso.id %}">Editar</a></li>
+                        </ul>
+                    </div>
+                </td>
+
+            </tr>
+        {% endfor %}
+
+    {% else %}
+        <h1>No hay registros de Recursos</h1>
+    {% endif %}
+    </tbody>
+{% endblock cuerpo_tabla %}
+
+{% block new_button %}
+    <a href="{% url "gestion_inventario:crear_recurso" %}" class="btn btn-success"><i class="fa  fa-plus-circle"></i>  Nuevo Recurso</a>
+{% endblock %}

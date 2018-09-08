@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{# Load the tag library #}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block page-title %}Perfil{% endblock %}
+
+{% block page-description %}{{ usuario.get_full_name }}{% endblock %}
+
+{% block content %}
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{ usuario.get_full_name }}</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="{% if foto %}{{ usuario.imagen_url }} {% else %} {% static 'images/perfil_defecto.png' %}{% endif %}" width="200" title="Imagen de perfil" class="img-circle" alt="Imagen de perfil">
+                </div>
+                <div class="col-md-8">
+                    <h4>
+                        Nombre
+                        <span class="pull-right text-muted">{{ usuario.first_name }}</span>
+                    </h4>
+                    <h4>
+                        Apellidos
+                        <span class="pull-right text-muted">{{ usuario.last_name }}</span>
+                    </h4>
+                    <h4>
+                        Nombre de Usuario
+                        <span class="pull-right text-muted">{{ usuario.username }}</span>
+                    </h4>
+                    <h4>
+                        Dirección de Correo Electrónico
+                        <span class="pull-right text-muted">{{ usuario.email }}</span>
+                    </h4>
+                    <h4>
+                        Dirección
+                        <span class="pull-right text-muted">{{ usuario.direccion }}</span>
+                    </h4>
+                    <h4>
+                        Teléfono
+                        <span class="pull-right text-muted">{{ usuario.telefono }}</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+            <a href="{% url "gestion_usuarios:edit" usuario.id %}" class="btn btn-info">Actualizar</a>
+            <a href="{% url "gestion_usuarios:password_change" %}" class="btn btn-info">Cambiar Contraseña</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{# Load the tag library #}
+
+
+{% block content %}
+
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Por favor diligencie el formulario</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form method="post" class="form-horizontal" enctype="multipart/form-data">
+            <div class="box-body">
+                {% csrf_token %}
+                {% bootstrap_form form layout="horizontal" %}
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <input type="submit" value="Guardar" class="btn btn-info"/>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+{% endblock %}
