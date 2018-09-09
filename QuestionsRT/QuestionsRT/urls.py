@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="index.html"), name='inicio'),
     url(r'^inicio$', TemplateView.as_view(template_name="index.html"), name='inicio'),
     url(r'^usuarios/', include('usuarios.urls', namespace='gestion_usuarios')),
-    #url(r'^preguntas/', include('preguntas.urls', namespace='gestion_preguntas')),
+    url(r'^preguntas/', include('preguntas.urls', namespace='gestion_preguntas')),
     url(r'^admin/', admin.site.urls),
     #url(r'^login$', login, name='login'),
     #url(r'^logout$', logout, {'next_page': 'inicio'}, name='logout'),
