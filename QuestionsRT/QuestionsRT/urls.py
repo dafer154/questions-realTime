@@ -13,22 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
 from django.contrib import admin
-from django.conf.urls import url, include
-from django.contrib.auth.views import login, logout
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
-
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name="index.html"), name='inicio'),
-    url(r'^inicio$', TemplateView.as_view(template_name="index.html"), name='inicio'),
-    url(r'^usuarios/', include('usuarios.urls', namespace='gestion_usuarios')),
-    url(r'^preguntas/', include('preguntas.urls', namespace='gestion_preguntas')),
-    url(r'^admin/', admin.site.urls),
-    #url(r'^login$', login, name='login'),
-    #url(r'^logout$', logout, {'next_page': 'inicio'}, name='logout'),
+    path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(template_name="index.html"), name='inicio'),
+    path('', TemplateView.as_view(template_name="index.html"), name='inicio'),
+    path('usuarios/', include('usuarios.urls', namespace="gestion_usuarios")),
+    path('preguntas/', include('preguntas.urls', namespace="gestion_preguntas")),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    #url('login', login, name='login'),
+    #url('logout', logout, {'next_page': 'inicio'}, name='logout'),
+
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

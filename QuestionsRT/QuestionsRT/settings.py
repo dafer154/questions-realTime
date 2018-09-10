@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-
+    'channels',
     'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #app channel
+
 
     #Apps
     'usuarios',
@@ -77,6 +80,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'QuestionsRT.wsgi.application'
 
+
+ASGI_APPLICATION = 'QuestionsRT.routing.application'
+
+#Configuracion de Django channels
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis-server-name", 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

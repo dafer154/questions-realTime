@@ -1,6 +1,6 @@
 from django.views.generic import CreateView, UpdateView, DetailView, View
 from django.views.generic import TemplateView, ListView
-from django.core.urlresolvers import reverse_lazy
+#from django.core.urlresolvers import reverse_lazy
 
 from .models import Usuario
 from .forms import UsuarioCreateForm
