@@ -1,0 +1,26 @@
+.card-global{
+    width: 27% !important;
+    border-radius: 17px;
+    border: solid 1px !important;
+    padding: 20px !important;
+    margin: 1%;
+    background: white;
+}
+
+.image-card{
+    width: 100% !important;
+    border-radius: 142px !important;
+}
+
+.card-wrapper{
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.title{
+    text-align: center;
+    color: black;
+    font-size: 3em !important;
+}

@@ -15,12 +15,16 @@ from channels.auth import AuthMiddlewareStack
 from preguntas.consumers import ClassroomVirtual
 
 
+
+websocket_urlpatterns = [
+    path("classroom/stream", ClassroomVirtual),
+]
+
 application = ProtocolTypeRouter({
     "websocket": AuthMiddlewareStack(
-        URLRouter([
-            # URLRouter just takes standard Django path() or url() entries.
-            path("classroom/stream", ClassroomVirtual),
-        ]),
+        URLRouter(
+            websocket_urlpatterns
+        ),
     ),
 
 })

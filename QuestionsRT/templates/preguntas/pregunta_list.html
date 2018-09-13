@@ -3,53 +3,70 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 
-{% block page-title %}Listado de Usuarios{% endblock %}
-{% block page-description %}Utilice las opciones para gestionar usuarios{% endblock %}
 
-{% block cabecera_tabla %}
-    <thead>
-    <tr>
-        <td>#</td>
-        <td>Nombre</td>
-        <td>Apellido</td>
-        <td>Email</td>
-        <td>Celular</td>
-    </tr>
 
-    </thead>
-{% endblock cabecera_tabla %}
-{% block cuerpo_tabla %}
-    <tbody>
-    {% if object_list %}
-        {% for usuario in object_list %}
-            <tr>
-                <td>{{ usuario.id }}</td>
-                <td>{{ usuario.first_name }}</td>
-                <td>{{ usuario.last_name }}</td>
-                <td>{{ usuario.email }}</td>
-                <td>{{ usuario.celular }}</td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Opciones</button>
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Opciones de gestión de usuarios</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url "gestion_usuarios:crear_usuario" %}">Registrar usuario</a></li>
-                        </ul>
-                    </div>
-                </td>
 
-            </tr>
-        {% endfor %}
 
-    {% else %}
-        <h1>No hay registros de Usuarios</h1>
-    {% endif %}
-    </tbody>
-{% endblock cuerpo_tabla %}
+{% block content %}
+
+<h1 style="text-align: center">Classroom virtual</h1>
+
+<a href="#" class="btn btn-danger">Resultados</a>
+
+
+<div class="card-wrapper">
+    {% for pregunta in object_list %}
+
+    <div class="card card-global" style="width: 18rem;">
+      <img class="card-img-top image-card" src="../media/pregunta.jpg" alt="Card image cap">
+        <div class="card-body">
+        <h5 class="card-title">{{pregunta.tipo}}</h5>
+        <p class="card-text">{{pregunta.pregunta}}</p>
+        <a href="#" class="btn btn-primary">Enviar pregunta</a>
+      </div>
+    </div>
+
+{% endfor %}
+
+</div>
+
+
+{% endblock %}
 
 {% block new_button %}
     <a href="{% url "gestion_usuarios:crear_usuario" %}" class="btn btn-success"><i class="fa  fa-plus-circle"></i> Crear Usuario</a>
 {% endblock %}
+
+
+{% block specific-js %}
+
+    <script>
+
+        console.log("david");
+
+        $(function () {
+            // Correctly decide between ws:// and wss://
+            var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+            var ws_path = ws_scheme + '://' + window.location.host + "/classroom/stream";
+            console.log("Connecting to " + ws_path);
+
+            var socket = new ReconnectingWebSocket(ws_path);
+            // Handle incoming messages
+            socket.onmessage = function (message) {
+                // Decode the JSON
+                console.log("Got websocket message " + message.data);
+                var data = JSON.parse(message.data);
+            };
+
+            // Helpful debugging
+            socket.onopen = function () {
+                console.log("Connected to chat socket");
+            };
+            socket.onclose = function () {
+                console.log("Disconnected from chat socket");
+            }
+        });
+    </script>
+
+{% endblock %}
+
