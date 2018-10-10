@@ -2,10 +2,7 @@
 {# Load the tag library #}
 {% load staticfiles %}
 {% load bootstrap3 %}
-
-
-
-
+{% load user_tags %}
 
 {% block content %}
 
@@ -13,60 +10,190 @@
 
 <a href="#" class="btn btn-danger">Resultados</a>
 
+<p>
+    esto es una prueba
+    {{request.user}}
+</p>
+
+{% if request.user|has_group:1%}
 
 <div class="card-wrapper">
     {% for pregunta in object_list %}
 
     <div class="card card-global" style="width: 18rem;">
-      <img class="card-img-top image-card" src="../media/pregunta.jpg" alt="Card image cap">
+        <img class="card-img-top image-card" src="../media/pregunta.jpg" alt="Card image cap">
         <div class="card-body">
-        <h5 class="card-title">{{pregunta.tipo}}</h5>
-        <p class="card-text">{{pregunta.pregunta}}</p>
-        <a href="#" class="btn btn-primary">Enviar pregunta</a>
-      </div>
+            <h5 class="card-title">{{pregunta.tipo}}</h5>
+            <p class="card-text">{{pregunta.pregunta}}</p>
+            <button type="button" class="btn btn-primary btn-pregunta" data-toggle="modal" data-id="{{pregunta.id}}"
+                    data-target="#myModal4">Evaluar tema
+            </button>
+        </div>
     </div>
 
-{% endfor %}
+    {% endfor %}
 
 </div>
+
+
+<div id="modal_pregunta">
+    <div class="modal inmodal" id="myModal4" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
+         data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <h1 class="modal-id" hidden>
+                    </h1>
+                    <i class="fa fa-question-circle modal-icon"></i>
+                    <h4 class="modal-tipo">Tipo</h4>
+                    <div class="text-left">
+                        <h2 class="modal-pregunta">Modal title</h2>
+                        <ol class="modal-pregunta-opciones"></ol>
+                    </div>
+                    <div class="align-left">
+
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                    <div class="modal-respuestas"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white cerrar" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="responderPregunta()">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% else %}
+
+{% endif %}
+
+{% if request.user|has_group:0%}
+
+
+<p>
+    Pruebita
+</p>
+
+{% endif %}
 
 
 {% endblock %}
 
 {% block new_button %}
-    <a href="{% url "gestion_usuarios:crear_usuario" %}" class="btn btn-success"><i class="fa  fa-plus-circle"></i> Crear Usuario</a>
+<a href="{% url " gestion_usuarios:crear_usuario" %}" class="btn btn-success"><i
+        class="fa  fa-plus-circle"></i> Crear Usuario</a>
 {% endblock %}
 
 
 {% block specific-js %}
 
-    <script>
+<script>
 
-        console.log("david");
+    console.log("david");
 
-        $(function () {
-            // Correctly decide between ws:// and wss://
-            var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-            var ws_path = ws_scheme + '://' + window.location.host + "/classroom/stream";
-            console.log("Connecting to " + ws_path);
+    $(function () {
+        // Correctly decide between ws:// and wss://
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var ws_path = ws_scheme + '://' + window.location.host + "/classroom/stream";
+        console.log("Connecting to " + ws_path);
 
-            var socket = new ReconnectingWebSocket(ws_path);
-            // Handle incoming messages
-            socket.onmessage = function (message) {
-                // Decode the JSON
-                console.log("Got websocket message " + message.data);
-                var data = JSON.parse(message.data);
-            };
+        var socket = new ReconnectingWebSocket(ws_path);
 
-            // Helpful debugging
-            socket.onopen = function () {
-                console.log("Connected to chat socket");
-            };
-            socket.onclose = function () {
-                console.log("Disconnected from chat socket");
+        console.log("prueba");
+
+        // Handle incoming messages
+        socket.onmessage = function (message) {
+
+            var data = JSON.parse(e.data);
+            console.log("Got websocket message " + data);
+
+            var form;
+            var id_pregunta;
+
+            if (data.tipo === "Pregunta de Falso o Verdadero") {
+                form = fillContainer(['falso', 'verdadero'], false);
             }
+
+            $('#myModal4 .modal-pregunta').text(data.pregunta);
+            if (data['pregunta opciones']) {
+                for (var i = 0; i < data['pregunta opciones'].length; i++) {
+                    var li = document.createElement('li');
+                    li.innerHTML = data['pregunta opciones'][i];
+                    $('#myModal4 .modal-pregunta-opciones').append(li);
+                }
+            }
+            $('#myModal4 .modal-id').text(data.id_pregunta);
+            $('#myModal4 .modal-tipo').text(data.tipo);//captura id del usuario
+            $('#myModal4 .modal-respuestas').html(''); //Limpia modal
+            $('#myModal4 .modal-respuestas').append(form); //incluye los datos en el modal
+            $('#myModal4').modal("show") //Muestra el modal en tiempo real
+
+
+            //Funcion que crea el modal
+
+            function fillContainer(opciones, multiple) {
+                respuestas = ['a', 'b', 'c', 'd'];
+                var form = document.createElement('form');
+                form.setAttribute('id', 'respuesta_form')
+                var type;
+                if (multiple) {
+                    type = 'checkbox'
+                } else {
+                    type = 'radio'
+                }
+                var radioBtn;
+                var div;
+                var span;
+                var label
+                for (var i = 0; i < opciones.length; i++) {
+                    div = document.createElement('div');
+                    span = document.createElement('span');
+                    label = document.createElement('label');
+                    label.innerHTML = data[opciones[i]];
+                    //span.innerHTML= data[opciones[i]];
+                    radioBtn = document.createElement('input');
+                    radioBtn.setAttribute('type', type);
+                    radioBtn.setAttribute('name', 'respuesta');
+                    radioBtn.setAttribute('value', i);
+                    div.appendChild(radioBtn);
+                    //div.appendChild(span);
+                    div.appendChild(label);
+                    form.appendChild(div);
+                }
+                return form;
+            }
+
+        };
+
+        // Helpful debugging
+        socket.onopen = function() {
+            //Captura id del boton
+            //var id_pregunta=$("#boton").attr("data-id");
+            //console.log(id_pregunta)
+        }
+
+        if (socket.readyState == WebSocket.OPEN) socket.onopen();
+
+        $(".btn-pregunta").on('click', function(event){
+            //console.log($(this).data("id"));
+            var id_pregunta =  $(this).data("id");
+            console.log(id_pregunta);
+            socket.send(id_pregunta);
+
+
         });
-    </script>
+
+
+        socket.onclose = function () {
+            console.log("Disconnected from chat socket");
+        }
+    });
+</script>
 
 {% endblock %}
 

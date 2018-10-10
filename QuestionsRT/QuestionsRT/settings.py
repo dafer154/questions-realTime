@@ -25,8 +25,14 @@ SECRET_KEY = '$cbq)22fmomeq%u$n@5-q0%ccu3(i+qx^r*uq8&zj-*_$p*aa*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+from django.urls import reverse_lazy
+LOGIN_URL = reverse_lazy('login')
+#LOGIN_REDIRECT_URL = reverse_lazy('inicio')
+LOGOUT_URL = '/'
+
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -39,9 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    #app channel
-
 
     #Apps
     'usuarios',

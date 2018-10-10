@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 {% load staticfiles %}
+
 <html>
 <head lang="es">
 
@@ -65,7 +66,6 @@
                                 <!-- Menu Toggle Button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <!-- The user image in the navbar-->
-                                    <img src="{% if foto %}{{ usuario.imagen_url }} {% else %} {% static 'images/perfil_defecto.png' %}{% endif %}" class="user-image" alt="Imagen de perfil">
                                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                     <span class="hidden-xs">{{ user.get_full_name }}</span>
                                 </a>
@@ -80,12 +80,13 @@
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="{% url "usuarios:detail" user.id %}" class="btn btn-default btn-flat">Perfil</a>
                                         </div>
                                         <div class="pull-right">
-                                                <a class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Cerrar Sesión</a>
+                                                <a href="{% url 'logout' %}" class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Cerrar Sesión</a>
+                                                <a href="{% url 'login' %}" class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Iniciar sesion</a>
                                             {% else %}
-                                                <a  class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Cerrar Sesión</a>
+                                                <a href="{% url 'logout' %}" class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Cerrar Sesión</a>
+                                                <a href="{% url 'login' %}" class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Iniciar sesion</a>
                                             {% endif %}
                                         </div>
                                     </li>
@@ -153,6 +154,7 @@
 
     <!--Script que permite notificar los mensajes de registro y edicion de todos los actores -->
     <script src="{% static 'plugins/toastr/toastr.js' %}"></script>
+
     <script>
         {% for msg in messages %}
             $(document).ready(function(){
