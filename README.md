@@ -1,5 +1,5 @@
 # questions-realTime
-Proyecto para la charla en el  PyDay-Cali sobre Django-Channels 
+Proyecto para charla futura sobre Django-Channels 
 
 
 1) Crear ambiente virtual (virtualenv o virtualwraper)
