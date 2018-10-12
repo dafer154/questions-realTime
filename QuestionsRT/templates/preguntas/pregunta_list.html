@@ -11,11 +11,10 @@
 <a href="#" class="btn btn-danger">Resultados</a>
 
 <p>
-    esto es una prueba
-    {{request.user}}
+
 </p>
 
-{% if request.user|has_group:1%}
+
 
 <div class="card-wrapper">
     {% for pregunta in object_list %}
@@ -68,18 +67,14 @@
 </div>
 
 
-{% else %}
 
-{% endif %}
-
-{% if request.user|has_group:0%}
 
 
 <p>
     Pruebita
 </p>
 
-{% endif %}
+
 
 
 {% endblock %}
@@ -109,8 +104,9 @@
         // Handle incoming messages
         socket.onmessage = function (message) {
 
-            var data = JSON.parse(e.data);
-            console.log("Got websocket message " + data);
+            var data = JSON.parse(message.data); //datos en Json
+            console.log(data);
+            //Recorre Json
 
             var form;
             var id_pregunta;
@@ -120,6 +116,9 @@
             }
 
             $('#myModal4 .modal-pregunta').text(data.pregunta);
+
+            console.log(            $('#myModal4 .modal-pregunta').text(data.pregunta))
+
             if (data['pregunta opciones']) {
                 for (var i = 0; i < data['pregunta opciones'].length; i++) {
                     var li = document.createElement('li');
@@ -190,7 +189,7 @@
 
 
         socket.onclose = function () {
-            console.log("Disconnected from chat socket");
+            console.log("Desconectado omeeee");
         }
     });
 </script>

@@ -7,33 +7,37 @@ from .models import Pregunta
 class ClassroomVirtual(WebsocketConsumer):
 
     def connect(self):
-        print("hablame conectadooooooo")
+        # Called on connection.
+        # To accept the connection call:
+        self.accept()
+        # Or accept the connection and specify a chosen subprotocol.
+        # A list of subprotocols specified by the connecting client
+        # will be available in self.scope['subprotocols']
+
 
 
 
     def receive(self, text_data):
 
-        pregunta = Pregunta.object.get(pk=(text_data['text']))
+        pregunta = Pregunta.objects.get(pk=text_data)
 
-        Group("chat").send({
+        print(pregunta);
 
-            'text': json.dumps({
-                'pregunta': str(pregunta.pregunta),
-                'falso': str('Falso'),
-                'verdadero': str('Verdadero'),
-                'id_pregunta': int(pregunta.id),
-                'tipo': str('Pregunta de Falso o Verdadero'),
-            })
-        })
+        data = {
+            'pregunta': str(pregunta.pregunta),
+            'falso': str('Falso'),
+            'verdadero': str('Verdadero'),
+            'id_pregunta': int(pregunta.id),
+            'tipo': str('Pregunta de Falso o Verdadero')
+        }
 
-        print(pregunta)
+        prueba = json.dumps(data);
+        print(prueba);
 
-        data = json.loads(text_data)
-        self.commands[data['command']](self, data)
+        self.send(text_data=json.dumps(data))
 
-    #
-    # def disconnect(self, close_code):
-    #     print("chao papaaaaa")
+        #self.send({'text': json.dumps(data)})
+
 
     def send_message(self, message):
         self.send(text_data=json.dumps(message))
