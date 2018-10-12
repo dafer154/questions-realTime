@@ -6,38 +6,35 @@ from .models import Pregunta
 
 class ClassroomVirtual(WebsocketConsumer):
 
+
     def connect(self):
-        # Called on connection.
-        # To accept the connection call:
+        async_to_sync(self.channel_layer.group_add)("chat", self.channel_name)
         self.accept()
-        # Or accept the connection and specify a chosen subprotocol.
-        # A list of subprotocols specified by the connecting client
-        # will be available in self.scope['subprotocols']
-
-
-
 
     def receive(self, text_data):
-
         pregunta = Pregunta.objects.get(pk=text_data)
 
-        print(pregunta);
-
         data = {
-            'pregunta': str(pregunta.pregunta),
-            'falso': str('Falso'),
-            'verdadero': str('Verdadero'),
-            'id_pregunta': int(pregunta.id),
-            'tipo': str('Pregunta de Falso o Verdadero')
-        }
-
-        prueba = json.dumps(data);
-        print(prueba);
-
-        self.send(text_data=json.dumps(data))
-
-        #self.send({'text': json.dumps(data)})
+                'pregunta': str(pregunta.pregunta),
+                'falso': str('Falso'),
+                'verdadero': str('Verdadero'),
+                'id_pregunta': int(pregunta.id),
+                'tipo': str('Pregunta de Falso o Verdadero')
+            }
 
 
-    def send_message(self, message):
+        async_to_sync(self.channel_layer.group_send)(
+            "chat",
+            {
+                'type': 'chat_message',
+                'message': data
+            }
+        )
+
+    def chat_message(self, event):
+        message = event['message']
         self.send(text_data=json.dumps(message))
+
+
+    def disconnect(self, close_code):
+        async_to_sync(self.channel_layer.group_discard)("chat", self.channel_name)

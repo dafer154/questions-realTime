@@ -99,15 +99,10 @@
 
         var socket = new ReconnectingWebSocket(ws_path);
 
-        console.log("prueba");
-
         // Handle incoming messages
         socket.onmessage = function (message) {
 
-            var data = JSON.parse(message.data); //datos en Json
-            console.log(data);
-            //Recorre Json
-
+            var data = JSON.parse(message.data);
             var form;
             var id_pregunta;
 
@@ -116,8 +111,6 @@
             }
 
             $('#myModal4 .modal-pregunta').text(data.pregunta);
-
-            console.log(            $('#myModal4 .modal-pregunta').text(data.pregunta))
 
             if (data['pregunta opciones']) {
                 for (var i = 0; i < data['pregunta opciones'].length; i++) {
@@ -184,12 +177,10 @@
             console.log(id_pregunta);
             socket.send(id_pregunta);
 
-
         });
 
-
         socket.onclose = function () {
-            console.log("Desconectado omeeee");
+            console.log("Desconectado");
         }
     });
 </script>
