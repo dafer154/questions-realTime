@@ -183,6 +183,48 @@
             console.log("Desconectado");
         }
     });
+
+
+    function responderPregunta(argument){
+
+
+            var data = {
+                idEstudiante: '{{request.user.id}}',
+                idPregunta: $(".modal-id").text(),
+                respuesta: $("#respuesta_form input[name='respuesta']:checked").val() //obtiene el valor en JS
+            };
+
+            //funcion para mandar los datos al servidor
+            $.ajax({
+                data: data, //la data que se va enviar
+                method: 'get', //metodo
+                url: "respuesta", //url de la peticion
+                dataType: 'json',
+
+                success: function (data) {
+                    console.log(data.is_taken);
+                    if (data.is_taken){
+
+                    $('#myModal4').modal('hide');
+                    toastr.error(data.error_message);
+                    }
+
+                    else{
+                        $('#myModal4').modal('hide');
+                        toastr.success(data.error_message);
+                       }
+                    },
+                error: function (err) {
+                    toastr.success('No se envio la respuesta!!');
+                }
+            })
+
+            idCurso="";
+            idEstudiante = "";
+            idPregunta = "";
+            respuesta = "";
+        }
+
 </script>
 
 {% endblock %}
