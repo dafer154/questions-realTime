@@ -8,13 +8,15 @@
 
 <h1 style="text-align: center">Classroom virtual</h1>
 
+
+
+{% if request.user|has_group:0%}
+
 <a href="#" class="btn btn-danger">Resultados</a>
 
 <p>
 
 </p>
-
-
 
 <div class="card-wrapper">
     {% for pregunta in object_list %}
@@ -67,14 +69,48 @@
 </div>
 
 
+{% endif %}
 
 
+{% if request.user|has_group:1%}
 
 <p>
-    Pruebita
+    Aqui Se mostraran las preguntas en tiempo real a los estudiantes
 </p>
 
 
+<div id="modal_pregunta">
+    <div class="modal inmodal" id="myModal4" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false"
+         data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <h1 class="modal-id" hidden>
+                    </h1>
+                    <i class="fa fa-question-circle modal-icon"></i>
+                    <h4 class="modal-tipo">Tipo</h4>
+                    <div class="text-left">
+                        <h2 class="modal-pregunta">Modal title</h2>
+                        <ol class="modal-pregunta-opciones"></ol>
+                    </div>
+                    <div class="align-left">
+
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                    <div class="modal-respuestas"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white cerrar" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="responderPregunta()">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
 
 
 {% endblock %}
@@ -198,7 +234,7 @@
             $.ajax({
                 data: data, //la data que se va enviar
                 method: 'get', //metodo
-                url: "respuesta", //url de la peticion
+                url: "preguntas/respuesta", //url de la peticion
                 dataType: 'json',
 
                 success: function (data) {

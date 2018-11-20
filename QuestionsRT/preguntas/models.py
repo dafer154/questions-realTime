@@ -18,7 +18,6 @@ class Pregunta(models.Model):
 
 
 class Unica_respuesta(models.Model):
-    #cursos = models.ForeignKey(Cursos, on_delete=models.CASCADE)
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
     estudiante = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     respuesta = models.TextField()

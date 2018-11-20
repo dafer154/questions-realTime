@@ -6,7 +6,6 @@ from usuarios.models import Usuario
 @register.filter(name = 'has_group')
 def has_group(user, group_type):
 
-    print("hello")
 
     user_group=Usuario.objects.get(pk=user.id)
 

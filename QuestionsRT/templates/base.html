@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load user_tags %}
 
 <html>
 <head lang="es">
@@ -14,6 +14,7 @@
 
     <!--=================== Estilos de Terceros ===================-->
     <!-- Bootstrap Core CSS -->
+    
     <link href="{% static 'AdminLTE-2.4.0-rc/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/main.css'' %}" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -24,10 +25,10 @@
     <!--Icono principal de la pagina -->
     <!--<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"> -->
     {% block all-css %}
-        <!-- Custom CSS -->
-        <link href="{% static 'AdminLTE-2.4.0-rc/dist/css/AdminLTE.min.css' %}" rel="stylesheet">
-        <link href="{% static 'AdminLTE-2.4.0-rc/dist/css/skins/_all-skins.min.css' %}" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.css' %}"/>
+    <!-- Custom CSS -->
+    <link href="{% static 'AdminLTE-2.4.0-rc/dist/css/AdminLTE.min.css' %}" rel="stylesheet">
+    <link href="{% static 'AdminLTE-2.4.0-rc/dist/css/skins/_all-skins.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.css' %}"/>
     {% endblock %}
 
     <!--=================== Estilos especificos de cada pagina ===================-->
@@ -35,141 +36,149 @@
     {% endblock %}
 
     <!--=================== Titulo ===================-->
-    <title>{% block title %}Bodega Deltec{% endblock %}</title>
+    <title>{% block title %}Questions RT{% endblock %}</title>
 
 </head>
 
 <body class="hold-transition">
-    <div class="wrapper">
-        <!-- Main Header -->
-        <header class="main-header">
-            <!-- Logo -->
-            <a class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">B<b>D</b></span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Questions REAL-TIME</b></span>
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+        <!-- Logo -->
+        <a class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini">R<b>R</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Questions RT</b></span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
             </a>
-
-            <!-- Header Navbar -->
-            <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
-                <!-- Navbar Right Menu -->
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        {% if user.is_authenticated %}
-                            <!-- User Account Menu -->
-                            <li class="dropdown user user-menu">
-                                <!-- Menu Toggle Button -->
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <!-- The user image in the navbar-->
-                                    <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                    <span class="hidden-xs">{{ user.get_full_name }}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <!-- The user image in the menu -->
-                                    <li class="user-header">
-                                        <img src="{% if foto %}{{ usuario.imagen_url }} {% else %} {% static 'images/perfil_defecto.png' %}{% endif %}" class="img-circle" alt="Imagen de perfil">
-                                        <p>
-                                            {{ user.get_full_name }}
-                                        </p>
-                                    </li>
-                                    <!-- Menu Footer-->
-                                    <li class="user-footer">
-                                        <div class="pull-left">
-                                        </div>
-                                        <div class="pull-right">
-                                                <a href="{% url 'logout' %}" class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Cerrar Sesión</a>
-                                                <a href="{% url 'login' %}" class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Iniciar sesion</a>
-                                            {% else %}
-                                                <a href="{% url 'logout' %}" class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Cerrar Sesión</a>
-                                                <a href="{% url 'login' %}" class="btn btn-default btn-flat"><span class="fa fa-sign-out"></span> Iniciar sesion</a>
-                                            {% endif %}
-                                        </div>
-                                    </li>
-                                </ul>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    {% if user.is_authenticated %}
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">{{ user.get_full_name }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                {% if user.usuario.imagen_perfil %}
+                                <img alt="image" class="img-circle" width="100px" height="100px"
+                                     src="{{user.usuario.imagen_perfil.url}}"/>
+                                {% else %}
+                                <img alt="image" class="img-circle" width="100px" height="100px"
+                                     src="../media/pregunta.jpg"/>
+                                {% endif %}
+                                <p>
+                                    {{ user.get_full_name }}
+                                </p>
                             </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                </div>
+                                <div class="pull-right">
+                                    <a href="{% url 'logout' %}" class="btn btn-default btn-flat"><span
+                                            class="fa fa-sign-out"></span> Cerrar Sesión</a>
+                                    {% else %}
+                                    <a href="{% url 'logout' %}" class="btn btn-default btn-flat"><span
+                                            class="fa fa-sign-out"></span> Cerrar Sesión</a>
+                                    <a href="{% url 'login' %}" class="btn btn-default btn-flat"><span
+                                            class="fa fa-sign-out"></span> Iniciar sesion</a>
+                                    {% endif %}
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-        <!--<div id="wrapper">-->
-        {# =================== Carga la barra de navegacion =================== #}
-        {% block navbar %}
-            {# ============= default navbar ============== #}
-                {% include 'sidebar.html' %}
-        {% endblock %}
+    <!--<div id="wrapper">-->
+    {# =================== Carga la barra de navegacion =================== #}
+    {% block navbar %}
+    {# ============= default navbar ============== #}
+    {% include 'sidebar.html' %}
+    {% endblock %}
 
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    {% block page-title %}Bodega Deltec{% endblock %}
-                    <small>{% block page-description %}Bodega Deltec{% endblock %}</small>
-                </h1>
-            </section>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                {% block page-title %}Questions Real-Time{% endblock %}
+            </h1>
+        </section>
 
-            <!-- Main content -->
-            <section class="content">
-                {# =================== Todo el contenido de la pagina se carga aqui =================== #}
-                {% block content %}
-                {% endblock %}
-            </section>
-        </div>
-
-
-        {# =================== Carga el footer de la pagina =================== #}
-        {% block footer %}
-            {% include 'footer.html' %}
-        {% endblock %}
-
-        {# =================== Carga el footer de la pagina =================== #}
-        {% block right-menu %}
-            {% include 'control_sidebar.html' %}
-        {% endblock %}
+        <!-- Main content -->
+        <section class="content">
+            {# =================== Todo el contenido de la pagina se carga aqui =================== #}
+            {% block content %}
+            {% endblock %}
+        </section>
     </div>
 
 
+    {# =================== Carga el footer de la pagina =================== #}
+    {% block footer %}
+    {% include 'footer.html' %}
+    {% endblock %}
+
+    {# =================== Carga el footer de la pagina =================== #}
+    {% block right-menu %}
+    {% include 'control_sidebar.html' %}
+    {% endblock %}
+</div>
 
 
 <!--=================== Scripts generales de todas las paginas ===================-->
 <!-- jQuery -->
 {% block jquery-js %}
-    <!-- jQuery 2.2.3 -->
-    <script src="{% static 'AdminLTE-2.4.0-rc/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
-    <script src="{% static 'jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'js/reconnecting-websocket.min.js' %}"></script>
+<!-- jQuery 2.2.3 -->
+<script src="{% static 'AdminLTE-2.4.0-rc/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<script src="{% static 'jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/reconnecting-websocket.min.js' %}"></script>
 
 {% endblock %}
 
 {% block custom-js %}
-    <!-- Bootstrap 3.3.6 -->
-    <script src="{% static 'AdminLTE-2.4.0-rc/bootstrap/js/bootstrap.min.js' %}"></script>
-    <!-- AdminLTE App -->
-    <script src="{% static 'AdminLTE-2.4.0-rc/dist/js/app.min.js' %}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{% static 'AdminLTE-2.4.0-rc/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'AdminLTE-2.4.0-rc/dist/js/app.min.js' %}"></script>
 
-    <!--Script que permite notificar los mensajes de registro y edicion de todos los actores -->
-    <script src="{% static 'plugins/toastr/toastr.js' %}"></script>
+<!--Script que permite notificar los mensajes de registro y edicion de todos los actores -->
+<script src="{% static 'plugins/toastr/toastr.js' %}"></script>
 
-    <script>
-        {% for msg in messages %}
-            $(document).ready(function(){
-                setTimeout(function() {
-                    toastr.options = {
-                        "closeButton": true,
-                        "progressBar": true,
-                        "positionClass": "toast-bottom-left",
-                        "showEasing": "swing"
-                    };
-                    toastr["{{ msg.tags }}"]("{{msg}}")
-                }, 500);
-            });
-        {% endfor %}
-    </script>
+<script>
+    {%
+        for msg in messages %}
+    $(document).ready(function () {
+        setTimeout(function () {
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-bottom-left",
+                "showEasing": "swing"
+            };
+            toastr["{{ msg.tags }}"]("{{msg}}")
+        }, 500);
+    });
+    {%
+        endfor %
+    }
+</script>
 {% endblock %}
 
 <!--=================== Scripts especificos de cada pagina ===================-->

@@ -8,6 +8,4 @@ app_name = 'usuarios'
 urlpatterns = [
     url('crear-usuario', UsuarioCreateView.as_view(), name='crear_usuario'),
     url('listar-usuarios', UsuariosListView.as_view(), name='listar_usuarios'),
-
-    url('log-out', LogoutTemplateView.as_view(), name='logout_2'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
