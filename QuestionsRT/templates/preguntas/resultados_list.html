@@ -1,0 +1,185 @@
+{% extends "base_list.html" %}
+{# Load the tag library #}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% load user_tags %}
+
+{% block content %}
+
+<h1 style="text-align: center">Classroom virtual</h1>
+
+
+{% if request.user|has_group:0%}
+
+<a href="#" class="btn btn-danger">Resultados</a>
+
+<p>
+
+</p>
+
+
+<div class="wrap-results">
+    <div class="question-result">
+        <div class="question">
+            <p>Pregunta</p>
+        </div>
+        <div class="estudent-list-good">
+            <div>
+                <ul>
+                    <li><span>David</span></li>
+                    <li><span>Mary</span></li>
+                    <li><span>Jairo</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="count-good">
+            <span>5</span>
+        </div>
+        <div class="estudent-list-bad">
+            <div>
+                <ul>
+                    <li><span>David</span></li>
+                    <li><span>Mary</span></li>
+                    <li><span>Jairo</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="count-bad">
+            <span>5</span>
+        </div>
+    </div>
+
+    <div class="question-result">
+        <div class="question">
+            <p>Pregunta</p>
+        </div>
+        <div class="estudent-list-good">
+            <div>
+                <ul>
+                    <li><span>David</span></li>
+                    <li><span>Mary</span></li>
+                    <li><span>Jairo</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="count-good">
+            <span>5</span>
+        </div>
+        <div class="estudent-list-bad">
+            <div>
+                <ul>
+                    <li><span>David</span></li>
+                    <li><span>Mary</span></li>
+                    <li><span>Jairo</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="count-bad">
+            <span>5</span>
+        </div>
+    </div>
+
+    <div class="question-result">
+        <div class="question">
+            <p>Pregunta</p>
+        </div>
+        <div class="estudent-list-good">
+            <div>
+                <ul>
+                    <li><span>David</span></li>
+                    <li><span>Mary</span></li>
+                    <li><span>Jairo</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="count-good">
+            <span>5</span>
+        </div>
+        <div class="estudent-list-bad">
+            <div>
+                <ul>
+                    <li><span>David</span></li>
+                    <li><span>Mary</span></li>
+                    <li><span>Jairo</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="count-bad">
+            <span>5</span>
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
+
+
+{% if request.user|has_group:1%}
+
+<p>
+    No hay naaaaa
+</p>
+
+
+{% endif %}
+
+
+{% endblock %}
+
+{% block new_button %}
+<a href="{% url " gestion_usuarios:crear_usuario" %}" class="btn btn-success"><i
+        class="fa  fa-plus-circle"></i> Crear Usuario</a>
+{% endblock %}
+
+
+{% block specific-js %}
+
+<style>
+    .wrap-results {
+        display: flex;
+        border: 1px solid black;
+        flex-wrap: wrap;
+    }
+
+    .question-result {
+        display: flex;
+        border: 1px solid black;
+        width: 100%;
+        padding-top: 2%;
+    }
+
+    .question {
+        border: 1px solid black;
+        width: 22%;
+    }
+
+    .estudent-list-good {
+        border: 1px solid black;
+        width: 30%;
+    }
+
+    .estudent-list-bad {
+        border: 1px solid black;
+        width: 22%;
+    }
+
+    .count-good {
+        border: 1px solid black;
+        width: 10%;
+    }
+
+    .count-bad {
+        border: 1px solid black;
+        width: 16%;
+    }
+</style>
+
+<script>
+
+    console.log("david");
+
+</script>
+
+
+{% endblock %}
+

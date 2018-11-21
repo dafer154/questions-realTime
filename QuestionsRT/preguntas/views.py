@@ -23,6 +23,15 @@ class PreguntasListView(ListView):
         context['count'] = self.get_queryset().count()
         return context
 
+class Resultados(ListView):
+    model = Pregunta
+    template_name = "preguntas/resultados_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(Resultados, self).get_context_data(**kwargs)
+        context['count'] = self.get_queryset().count()
+        return context
+
 class RespuestaAjax(View):
     def get(self, request, *args, **kwargs):
 

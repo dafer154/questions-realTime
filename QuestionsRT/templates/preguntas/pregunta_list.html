@@ -12,7 +12,7 @@
 
 {% if request.user|has_group:0%}
 
-<a href="#" class="btn btn-danger">Resultados</a>
+<a href="{% url "preguntas:resultados" %}" class="btn btn-success"></i>Resultados</a>
 
 <p>
 
