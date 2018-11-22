@@ -1,11 +1,10 @@
 .idea
-media
 ../.idea/
 *.pyc
 .gitignore~
 Thumbs.db
 */migrations/*
-*/__pycache__/*
+/__pycache__/
 */*/__pycache__/*
 requirements.txt~
 # No ignorar!
