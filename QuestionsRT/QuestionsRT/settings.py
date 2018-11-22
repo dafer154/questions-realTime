@@ -80,13 +80,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'QuestionsRT.wsgi.application'
-
 #ASGI para django channels
-
 ASGI_APPLICATION = 'QuestionsRT.routing.application'
 
 #Configuracion de Django channels
-
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",

@@ -21,11 +21,11 @@
 <div class="card-wrapper">
     {% for pregunta in object_list %}
 
-    <div class="card card-global" style="width: 18rem;">
-        <img class="card-img-top image-card" src="../media/pregunta.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">{{pregunta.tipo}}</h5>
-            <p class="card-text">{{pregunta.pregunta}}</p>
+    <div class="card card-global card-global-flex" style="width: 18rem;">
+        <img class="card-img-top image-card" src="{{pregunta.imagen_pregunta.url}}" alt="Card image cap">
+        <div class="card-flex">
+            <h5 class="card-title title-FV">{{pregunta.tipo}}</h5>
+            <p class="card-text pregunta-title">{{pregunta.pregunta}}</p>
             <button type="button" class="btn btn-primary btn-pregunta" data-toggle="modal" data-id="{{pregunta.id}}"
                     data-target="#myModal4">Evaluar tema
             </button>

@@ -7,45 +7,38 @@
 {% block page-description %}Utilice las opciones para gestionar usuarios{% endblock %}
 
 {% block cabecera_tabla %}
-    <thead>
-    <tr>
-        <td>#</td>
-        <td>Nombre</td>
-        <td>Apellido</td>
-        <td>Email</td>
-    </tr>
+<thead>
+<tr>
+    <td>#</td>
+    <td>Nombre</td>
+    <td>Apellido</td>
+    <td>Email</td>
+    <td>Tipo</td>
+</tr>
 
-    </thead>
+</thead>
 {% endblock cabecera_tabla %}
 {% block cuerpo_tabla %}
-    <tbody>
-    {% if object_list %}
-        {% for usuario in object_list %}
-            <tr>
-                <td>{{ usuario.id }}</td>
-                <td>{{ usuario.first_name }}</td>
-                <td>{{ usuario.last_name }}</td>
-                <td>{{ usuario.email }}</td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Opciones</button>
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Opciones de gestión de usuarios</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url "gestion_usuarios:crear_usuario" %}">Resultados</a></li>
-                        </ul>
-                    </div>
-                </td>
-
-            </tr>
-        {% endfor %}
-
+<tbody>
+{% if object_list %}
+{% for usuario in object_list %}
+<tr>
+    <td>{{ usuario.id }}</td>
+    <td>{{ usuario.first_name }}</td>
+    <td>{{ usuario.last_name }}</td>
+    <td>{{ usuario.email }}</td>
+    {% if usuario.perfil_usuario == 0 %}
+    <td>Profesor</td>
     {% else %}
-        <h1>No hay registros de Usuarios</h1>
+    <td>Estudiante</td>
     {% endif %}
-    </tbody>
+</tr>
+{% endfor %}
+
+{% else %}
+<h1>No hay registros de Usuarios</h1>
+{% endif %}
+</tbody>
 {% endblock cuerpo_tabla %}
 
 {% block new_button %}

@@ -1,6 +1,5 @@
 from django.views.generic import CreateView
-from django.views.generic import TemplateView, ListView, View
-from django.urls import reverse_lazy
+from django.views.generic import ListView, View
 from django.http import JsonResponse #Respuestas AJAX
 
 from usuarios.models import Usuario
@@ -12,7 +11,7 @@ class PreguntaCreateView(CreateView):
     template_name = "preguntas/crearPregunta_form.html"
     form_class = PreguntaCreateForm
     success_msg = "Pregunta creada exitosamente"
-    success_url = reverse_lazy('gestion_usuarios:listar_usuarios')
+    success_url = 'listar-preguntas'
 
 
 class PreguntasListView(ListView):
@@ -29,7 +28,23 @@ class Resultados(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Resultados, self).get_context_data(**kwargs)
+
+        preguntas = Pregunta.objects.all()
+        respuestas_preguntas = Unica_respuesta.objects.all()
+        pregunta_FV = []
+
+        for pre in preguntas:
+
+            respuesta = '0'
+            if pre.respuesta:
+                respuesta = '1'
+
+            buenas = respuestas_preguntas.filter(pregunta=pre.id, respuesta=respuesta)
+            malas = respuestas_preguntas.filter(pregunta=pre.id).exclude(respuesta=respuesta)
+            pregunta_FV.append({'pregunta': pre, 'buenas': buenas, 'malas':malas})
+
         context['count'] = self.get_queryset().count()
+        context['pregunta_FV'] = pregunta_FV
         return context
 
 class RespuestaAjax(View):

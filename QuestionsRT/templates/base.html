@@ -68,11 +68,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ user.get_full_name }}</span>
+                            <span class="hidden-x">{{ user.get_full_name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
-                            <li class="user-header">
+                            <li class="user-header" style="height: 142px !important;">
                                 {% if user.usuario.imagen_perfil %}
                                 <img alt="image" class="img-circle" width="100px" height="100px"
                                      src="{{user.usuario.imagen_perfil.url}}"/>
@@ -80,7 +80,7 @@
                                 <img alt="image" class="img-circle" width="100px" height="100px"
                                      src="../media/pregunta.jpg"/>
                                 {% endif %}
-                                <p>
+                                <p style="color: black">
                                     {{ user.get_full_name }}
                                 </p>
                             </li>
@@ -88,12 +88,10 @@
                             <li class="user-footer">
                                 <div class="pull-left">
                                 </div>
-                                <div class="pull-right">
+                                <div class="pull-left">
                                     <a href="{% url 'logout' %}" class="btn btn-default btn-flat"><span
                                             class="fa fa-sign-out"></span> Cerrar Sesión</a>
                                     {% else %}
-                                    <a href="{% url 'logout' %}" class="btn btn-default btn-flat"><span
-                                            class="fa fa-sign-out"></span> Cerrar Sesión</a>
                                     <a href="{% url 'login' %}" class="btn btn-default btn-flat"><span
                                             class="fa fa-sign-out"></span> Iniciar sesion</a>
                                     {% endif %}

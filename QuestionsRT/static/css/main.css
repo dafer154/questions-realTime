@@ -1,26 +1,44 @@
-.card-global{
-    width: 27% !important;
+.card-global-flex {
+    width: 53% !important;
+    max-width: 320px !important;
+    max-height: 485px !important;
     border-radius: 17px;
-    border: solid 1px !important;
+    box-shadow: 5px 10px 18px;
     padding: 20px !important;
     margin: 1%;
     background: white;
 }
 
-.image-card{
+.image-card {
     width: 100% !important;
-    border-radius: 142px !important;
+    border-radius: 22px !important;
 }
 
-.card-wrapper{
-
+.card-wrapper {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.title{
+.title {
     text-align: center;
     color: black;
     font-size: 3em !important;
+}
+
+.card-flex {
+    padding-top: 3%;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.pregunta-title{
+    font-size: 17px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.title-FV{
+    font-size: 18px;
+    color: blue;
+    text-align: center;
 }

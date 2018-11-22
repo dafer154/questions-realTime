@@ -4,4 +4,4 @@ from .models import Pregunta
 class PreguntaCreateForm(forms.ModelForm):
     class Meta:
         model = Pregunta
-        fields = ('pregunta', 'respuesta', 'tipo')
+        fields = ('pregunta', 'respuesta', 'tipo', 'imagen_pregunta')

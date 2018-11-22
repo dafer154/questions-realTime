@@ -3,9 +3,7 @@ from channels.generic.websocket import WebsocketConsumer
 import json
 from .models import Pregunta
 
-
 class ClassroomVirtual(WebsocketConsumer):
-
 
     def connect(self):
         async_to_sync(self.channel_layer.group_add)("chat", self.channel_name)

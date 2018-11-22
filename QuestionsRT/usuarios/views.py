@@ -1,7 +1,5 @@
-from django.views.generic import CreateView, UpdateView, DetailView, View
+from django.views.generic import CreateView
 from django.views.generic import TemplateView, ListView
-#from django.core.urlresolvers import reverse_lazy
-
 from .models import Usuario
 from .forms import UsuarioCreateForm
 
@@ -10,7 +8,7 @@ class UsuarioCreateView(CreateView):
     template_name = "usuarios/usuario_form.html"
     form_class = UsuarioCreateForm
     success_msg = "Usuario creado exitosamente"
-    #success_url = reverse_lazy('gestion_usuarios:listar_usuario')
+    success_url = 'listar-usuarios'
 
 
 class UsuariosListView(ListView):

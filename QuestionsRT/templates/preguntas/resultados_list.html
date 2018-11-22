@@ -6,110 +6,66 @@
 
 {% block content %}
 
-<h1 style="text-align: center">Classroom virtual</h1>
-
+<h1 style="text-align: center">Resultados</h1>
 
 {% if request.user|has_group:0%}
 
-<a href="#" class="btn btn-danger">Resultados</a>
 
-<p>
-
-</p>
-
+<h1 class="page-header"><i class="fa fa-question-circle"></i> Preguntas de falso y verdadero</h1>
 
 <div class="wrap-results">
+
+    <div class="titulo-pregunta titulos">
+        Pregunta
+    </div>
+    <div class="titulo-estudiantes_b titulos">
+        <i class="fa fa-check"></i>Estudiantes
+    </div>
+    <div class="titulo-cont-buenos titulos">
+        <i class="fa fa-check"></i>#
+    </div>
+    <div class="titulo-estudiantes_m titulos">
+        <i class="fa fa-close"></i>Estudiantes
+    </div>
+    <div class="titulo-cont-malos titulos">
+        <i class="fa fa-close"></i>#
+    </div>
+
+
+    {% for pre in pregunta_FV %}
     <div class="question-result">
         <div class="question">
-            <p>Pregunta</p>
+            <p>{{pre.pregunta}}</p>
         </div>
         <div class="estudent-list-good">
             <div>
+                {% for nombres_g in pre.buenas %}
                 <ul>
-                    <li><span>David</span></li>
-                    <li><span>Mary</span></li>
-                    <li><span>Jairo</span></li>
+                    <li><span>{{nombres_g.estudiante}}</span></li>
                 </ul>
+                {% endfor %}
             </div>
         </div>
         <div class="count-good">
-            <span>5</span>
+            <span>{{pre.buenas |length}}</span>
         </div>
         <div class="estudent-list-bad">
             <div>
+                {% for nombres_b in pre.malas %}
                 <ul>
-                    <li><span>David</span></li>
-                    <li><span>Mary</span></li>
-                    <li><span>Jairo</span></li>
+                    <li><span>{{nombres_b.estudiante}}</span></li>
                 </ul>
+                {% endfor %}
             </div>
         </div>
         <div class="count-bad">
-            <span>5</span>
+            <span>{{pre.malas |length}}</span>
         </div>
     </div>
 
-    <div class="question-result">
-        <div class="question">
-            <p>Pregunta</p>
-        </div>
-        <div class="estudent-list-good">
-            <div>
-                <ul>
-                    <li><span>David</span></li>
-                    <li><span>Mary</span></li>
-                    <li><span>Jairo</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="count-good">
-            <span>5</span>
-        </div>
-        <div class="estudent-list-bad">
-            <div>
-                <ul>
-                    <li><span>David</span></li>
-                    <li><span>Mary</span></li>
-                    <li><span>Jairo</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="count-bad">
-            <span>5</span>
-        </div>
-    </div>
-
-    <div class="question-result">
-        <div class="question">
-            <p>Pregunta</p>
-        </div>
-        <div class="estudent-list-good">
-            <div>
-                <ul>
-                    <li><span>David</span></li>
-                    <li><span>Mary</span></li>
-                    <li><span>Jairo</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="count-good">
-            <span>5</span>
-        </div>
-        <div class="estudent-list-bad">
-            <div>
-                <ul>
-                    <li><span>David</span></li>
-                    <li><span>Mary</span></li>
-                    <li><span>Jairo</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="count-bad">
-            <span>5</span>
-        </div>
-    </div>
+    <hr style="width: 100%; border-top: 1px solid black;">
+    {% endfor %}
 </div>
-
 
 {% endif %}
 
@@ -135,43 +91,95 @@
 {% block specific-js %}
 
 <style>
+
+    .page-header {
+        padding-bottom: 9px;
+        margin: 40px 0 20px;
+        border-bottom: 1px solid black;
+    }
+
     .wrap-results {
         display: flex;
-        border: 1px solid black;
         flex-wrap: wrap;
     }
 
     .question-result {
         display: flex;
-        border: 1px solid black;
         width: 100%;
-        padding-top: 2%;
+        padding-top: 3%;
     }
 
     .question {
-        border: 1px solid black;
         width: 22%;
+        padding: 0%;
+        text-align: left;
+        font-size: 16px;
+        color: black;
+        font-weight: bold;
+        padding-left: 3%;
+        border-right: 1px solid;
     }
 
     .estudent-list-good {
-        border: 1px solid black;
+
         width: 30%;
+        font-size: 16px;
+        color: black;
+        border-right: 1px solid;
     }
 
     .estudent-list-bad {
-        border: 1px solid black;
         width: 22%;
+        font-size: 16px;
+        color: black;
+        text-align: left;
+        border-right: 1px solid;
     }
 
     .count-good {
-        border: 1px solid black;
         width: 10%;
+        font-size: 16px;
+        text-align: center;
+        border-right: 1px solid;
     }
 
     .count-bad {
-        border: 1px solid black;
         width: 16%;
+        font-size: 16px;
+        text-align: center;
     }
+
+    .titulos {
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .titulo-pregunta {
+        width: 22%;
+        color: rgb(30, 144, 255);
+    }
+
+    .titulo-estudiantes_b {
+        width: 30%;
+        color: rgb(0, 128, 0);
+    }
+
+    .titulo-cont-buenos {
+        width: 10%;
+        color: rgb(0, 128, 0);
+    }
+
+    .titulo-estudiantes_m {
+        width: 22%;
+        color: rgb(255, 0, 0);
+    }
+
+    .titulo-cont-malos {
+        width: 16%;
+        color: rgb(255, 0, 0);
+    }
+
 </style>
 
 <script>
