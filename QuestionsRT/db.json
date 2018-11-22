@@ -1,0 +1,213 @@
+[
+  {
+    "model": "preguntas.pregunta",
+    "pk": 1,
+    "fields": {
+      "pregunta": "\u00bf Bogota es la capital de Colombia ?",
+      "respuesta": false,
+      "tipo": "Pregunta de Falso o Verdadero",
+      "imagen_pregunta": "imagenes_preguntas/bogota.jpg"
+    }
+  },
+  {
+    "model": "preguntas.pregunta",
+    "pk": 2,
+    "fields": {
+      "pregunta": "\u00bf El monte Everest es el mas grande del mundo ?",
+      "respuesta": true,
+      "tipo": "Pregunta de Falso o Verdadero",
+      "imagen_pregunta": "imagenes_preguntas/monte-everest.jpg"
+    }
+  },
+  {
+    "model": "preguntas.pregunta",
+    "pk": 3,
+    "fields": {
+      "pregunta": "\u00bf Rio de janeiro es la capital de Brasil ?",
+      "respuesta": false,
+      "tipo": "Pregunta de Falso o Verdadero",
+      "imagen_pregunta": "imagenes_preguntas/brasil.jpg"
+    }
+  },
+  {
+    "model": "preguntas.pregunta",
+    "pk": 4,
+    "fields": {
+      "pregunta": "\u00bf New york es la capital mas poblada del mundo ?",
+      "respuesta": true,
+      "tipo": "Pregunta de Falso o Verdadero",
+      "imagen_pregunta": "imagenes_preguntas/new-york.jpeg"
+    }
+  },
+  {
+    "model": "preguntas.pregunta",
+    "pk": 5,
+    "fields": {
+      "pregunta": "\u00bf El cinturon del fuego se encuentra ubicado en el continente africano ?",
+      "respuesta": false,
+      "tipo": "Pregunta de Falso o Verdadero",
+      "imagen_pregunta": "imagenes_preguntas/cinturon.jpg"
+    }
+  },
+  {
+    "model": "preguntas.pregunta",
+    "pk": 6,
+    "fields": {
+      "pregunta": "\u00bf La falla de San andres se encuentra en Colombia ?",
+      "respuesta": false,
+      "tipo": "Pregunta de Falso o Verdadero",
+      "imagen_pregunta": "imagenes_preguntas/san-andres.jpg"
+    }
+  },
+  {
+    "model": "preguntas.pregunta",
+    "pk": 7,
+    "fields": {
+      "pregunta": "\u00bf La selva del amazonas se encuentra entre venezuela, colombia y peru?",
+      "respuesta": false,
+      "tipo": "Pregunta de Falso o Verdadero",
+      "imagen_pregunta": "imagenes_preguntas/amazonas.jpg"
+    }
+  },
+  {
+    "model": "preguntas.pregunta",
+    "pk": 8,
+    "fields": {
+      "pregunta": "\u00bf El rio Nilo es el mas largo del mundo ?",
+      "respuesta": true,
+      "tipo": "Pregunta de Falso o Verdadero",
+      "imagen_pregunta": "imagenes_preguntas/rio-nilo.jpg"
+    }
+  },
+
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$120000$TE7QTZL62B3s$7Z5dyje51/5JWLBrUO+lDRTlkSt+iY873iLKSNYELmI=",
+      "last_login": "2018-11-21T19:56:15.284",
+      "is_superuser": true,
+      "username": "david",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2018-11-21T19:55:34.260",
+      "groups": [
+
+      ],
+      "user_permissions": [
+
+      ]
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$120000$5KUAKq1pPe17$j6MpI5muVXEsvaFuUjKUZm9gr1/blXFCtL1xllCIuqs=",
+      "last_login": "2018-11-22T12:43:38.055",
+      "is_superuser": false,
+      "username": "jairo",
+      "first_name": "jairo",
+      "last_name": "zuluaga",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-11-21T19:56:57.091",
+      "groups": [
+
+      ],
+      "user_permissions": [
+
+      ]
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$120000$s7kULi5qPRx3$4nW6Tk5SJdwfBHjMMuyHlk2GZDjWM8QZcqt7eZmnbUk=",
+      "last_login": "2018-11-22T12:44:58.975",
+      "is_superuser": false,
+      "username": "mary",
+      "first_name": "mary",
+      "last_name": "zuluaga",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-11-21T20:10:39.634",
+      "groups": [
+
+      ],
+      "user_permissions": [
+
+      ]
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$120000$DKd01rv4elF5$POvJcwn2YafY4qn+ZH5yR7KXefN/BP3C25uyp5TDOaA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "felipe",
+      "first_name": "felipe",
+      "last_name": "zuluaga",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-11-21T20:12:11.109",
+      "groups": [
+
+      ],
+      "user_permissions": [
+
+      ]
+    }
+  },
+  {
+    "model": "usuarios.usuario",
+    "pk": 2,
+    "fields": {
+      "perfil_usuario": 0,
+      "imagen_perfil": "imagenes_perfil/davidZuluaga_BbIH6u3.jpg",
+      "groups": [
+
+      ],
+      "user_permissions": [
+
+      ]
+    }
+  },
+  {
+    "model": "usuarios.usuario",
+    "pk": 3,
+    "fields": {
+      "perfil_usuario": 1,
+      "imagen_perfil": "imagenes_perfil/asincrona.jpg",
+      "groups": [
+
+      ],
+      "user_permissions": [
+
+      ]
+    }
+  },
+  {
+    "model": "usuarios.usuario",
+    "pk": 4,
+    "fields": {
+      "perfil_usuario": 1,
+      "imagen_perfil": "imagenes_perfil/database.png",
+      "groups": [
+
+      ],
+      "user_permissions": [
+
+      ]
+    }
+  }
+]

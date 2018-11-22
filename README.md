@@ -1,6 +1,7 @@
-# questions-realTime
-Proyecto para charla futura sobre Django-Channels 
+# Questions-realTime
+Pequeño ejemplo para la charla de Django Channels en la Meetup de Python Cali 1ro de Diciembre
 
+# Paso a paso de la instalacion
 
 1) Crear ambiente virtual (virtualenv o virtualwraper)
 2) Ingresar al ambiente virtual
@@ -8,5 +9,11 @@ Proyecto para charla futura sobre Django-Channels
 4) Instalar requerimientos pip install -r requirements.txt
 5) Migrar la base de datos python manage.py migrate
 6) Crear super usuario python manage.py createsuperuser
-7) Correr proyecto python manage.py runserver
+7) migrar los datos iniciales python manage.py loaddata db.json
+8) Correr proyecto python manage.py runserver
+
+
+Disfrute de esta aplicación con amor <3
+
+By: David Fernando Zuluaga
 
