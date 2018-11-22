@@ -160,8 +160,7 @@
 <script src="{% static 'plugins/toastr/toastr.js' %}"></script>
 
 <script>
-    {%
-        for msg in messages %}
+    {% for msg in messages %}
     $(document).ready(function () {
         setTimeout(function () {
             toastr.options = {
@@ -173,9 +172,8 @@
             toastr["{{ msg.tags }}"]("{{msg}}")
         }, 500);
     });
-    {%
-        endfor %
-    }
+    {% endfor %}
+
 </script>
 {% endblock %}
 

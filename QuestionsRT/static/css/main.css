@@ -16,7 +16,9 @@
 
 .card-wrapper {
     display: flex;
+    justify-content: center !important;
     flex-wrap: wrap;
+
 }
 
 .title {
@@ -31,13 +33,13 @@
     flex-direction: column !important;
 }
 
-.pregunta-title{
+.pregunta-title {
     font-size: 17px;
     text-align: center;
     font-weight: bold;
 }
 
-.title-FV{
+.title-FV {
     font-size: 18px;
     color: blue;
     text-align: center;

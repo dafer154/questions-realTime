@@ -84,6 +84,9 @@ WSGI_APPLICATION = 'QuestionsRT.wsgi.application'
 ASGI_APPLICATION = 'QuestionsRT.routing.application'
 
 #Configuracion de Django channels
+
+# @channel_layers: permite la conexion enntre la capa de Redis y Django
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",

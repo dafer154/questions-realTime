@@ -115,27 +115,48 @@
 
 {% endblock %}
 
-{% block new_button %}
-<a href="{% url " gestion_usuarios:crear_usuario" %}" class="btn btn-success"><i
-        class="fa  fa-plus-circle"></i> Crear Usuario</a>
-{% endblock %}
-
 
 {% block specific-js %}
 
 <script>
 
-    console.log("david");
-
     $(function () {
-        // Correctly decide between ws:// and wss://
+
+        /*
+            se incluye la misma url creada en el archivo Routing para la respectiva
+            conexion de los Websockets con Django
+        */
+
         var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
         var ws_path = ws_scheme + '://' + window.location.host + "/classroom/stream";
-        console.log("Connecting to " + ws_path);
-
         var socket = new ReconnectingWebSocket(ws_path);
 
-        // Handle incoming messages
+
+        /*
+            Se establece la conexion del websocket dentro de la Url
+        */
+
+        socket.onopen = function() {
+            console.log("Hello everywhere")
+        }
+
+        if (socket.readyState == WebSocket.OPEN) socket.onopen();
+
+        /*
+            Al dar click en el boton Evaluar tema, este envia el id de la pregunta
+            al socket y este es recibido para su respectivo proceso
+        */
+
+        $(".btn-pregunta").on('click', function(event){
+            var id_pregunta =  $(this).data("id");
+            socket.send(id_pregunta);
+
+        });
+
+        /*
+            Mensaje en tiempo real que envia el websocket
+         */
+
         socket.onmessage = function (message) {
 
             var data = JSON.parse(message.data);
@@ -198,31 +219,14 @@
 
         };
 
-        // Helpful debugging
-        socket.onopen = function() {
-            //Captura id del boton
-            //var id_pregunta=$("#boton").attr("data-id");
-            //console.log(id_pregunta)
-        }
-
-        if (socket.readyState == WebSocket.OPEN) socket.onopen();
-
-        $(".btn-pregunta").on('click', function(event){
-            //console.log($(this).data("id"));
-            var id_pregunta =  $(this).data("id");
-            console.log(id_pregunta);
-            socket.send(id_pregunta);
-
-        });
-
         socket.onclose = function () {
             console.log("Desconectado");
         }
+
     });
 
 
     function responderPregunta(argument){
-
 
             var data = {
                 idEstudiante: '{{request.user.id}}',

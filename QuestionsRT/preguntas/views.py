@@ -47,6 +47,10 @@ class Resultados(ListView):
         context['pregunta_FV'] = pregunta_FV
         return context
 
+
+# @class RespuestaAjax: vista manejada con Ajax que permite que los estudiantes
+# puedan responder las preguntas que se les realizan en tiempo real
+
 class RespuestaAjax(View):
     def get(self, request, *args, **kwargs):
 
