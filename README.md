@@ -1,5 +1,6 @@
 # Questions-realTime
 Pequeño ejemplo para la charla de Django Channels en la Meetup de Python Cali 1ro de Diciembre
+![Descriptive image](meetup-python-dic.png)
 
 # Paso a paso de la instalacion
 
