@@ -13,6 +13,7 @@ Pequeño ejemplo para la charla de Django Channels en la Meetup de Python Cali 1
 7) migrar los datos iniciales `python manage.py loaddata db.json`
 8) Correr proyecto `python manage.py runserver`
 
+NOTA: la contraseña de los profesores es: profesor123, y la de los estudiantes: estudiante123
 
 Disfrute de esta aplicación con amor <3
 
